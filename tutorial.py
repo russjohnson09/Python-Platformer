@@ -31,6 +31,28 @@ window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED)
 #window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.SCALED)
 #pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.SCALED)
 
+
+#https://stackoverflow.com/questions/43845800/how-do-i-add-background-music-to-my-python-game
+pygame.mixer.init()
+pygame.mixer.music.load("music.wav")
+# loops -1 continue indefinitely
+pygame.mixer.music.play(-1,0.0)
+
+sound1 = pygame.mixer.Sound('assets/Sfx/hit.wav')  # Load a sound.
+
+voice = pygame.mixer.Channel(5)
+
+
+def playHit():
+    if not voice.get_busy():
+        voice.play(sound1)
+
+
+# TODO config inputs.
+# TODO allow controller
+
+# TODO use text file for tile placement
+
 def update_window(fullscreen):
     print(WIDTH)
     if fullscreen:
@@ -112,6 +134,12 @@ class Player(pygame.sprite.Sprite):
 
     def make_hit(self):
         self.hit = True
+
+
+        print("play sound hit")
+        playHit()
+        #if sound1.
+        #sound1.get_b
 
     def move_left(self, vel):
         self.x_vel = -vel
