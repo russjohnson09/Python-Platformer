@@ -6,6 +6,7 @@ import pygame
 from pygame.locals import *
 
 from frog import Object, Fire, load_sprite_sheets
+from frog.Fire import *
 
 from os import listdir
 from os.path import isfile, join
@@ -70,9 +71,6 @@ def update_window(fullscreen):
         pygame.display.set_mode((WIDTH, HEIGHT),  pygame.SCALED)
 
 
-
-def flip(sprites):
-    return [pygame.transform.flip(sprite, True, False) for sprite in sprites]
 
 
 def get_block(size):
