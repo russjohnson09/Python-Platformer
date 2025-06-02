@@ -189,7 +189,8 @@ def main(window):
     objects = get_objects()
 
     offset_x = 0
-    scroll_area_width = 200
+    #scroll_area_width = 200
+    scroll_area_width = 400
 
     run = True
     while run:
