@@ -15,10 +15,20 @@ pygame.display.set_caption("Platformer")
 
 WIDTH, HEIGHT = 1280, 720
 # WIDTH, HEIGHT = 800, 800
+#FPS = 60
+
 FPS = 60
+
+PLAYER_VEL = 5
+PLAYER_VEL = 15
+PLAYER_VEL = 10
 PLAYER_VEL = 5
 
 #window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+
+scroll_area_width = 400
+scroll_area_width = 800
+
 
 print ("desktops", pygame.display.get_desktop_sizes())
 # https://github.com/pygame/pygame/blob/dac5b2e49613670f4c59ee7db06f2830e6e090ff/examples/setmodescale.py
@@ -122,8 +132,14 @@ def handle_move(player, objects):
 
     if keys[pygame.K_LEFT] and not collide_left:
         player.move_left(PLAYER_VEL)
-    if keys[pygame.K_RIGHT] and not collide_right:
-        player.move_right(PLAYER_VEL)
+    if keys[pygame.K_RIGHT]:
+        if not collide_right:
+            player.move_right(PLAYER_VEL)
+        # else:
+        #     if player.rect.right < collide_right.rect.left:# and ((player.rect.right - 10) > collide_right.rect.left):
+        #         print(player.rect.right, collide_right.rect.left)
+        #     #player.rect.right = collide_right.rect.left
+
 
     vertical_collide = handle_vertical_collision(player, objects, player.y_vel)
     to_check = [collide_left, collide_right, *vertical_collide]
@@ -186,11 +202,12 @@ def main(window):
 
     player = Player(100, 100, 50, 50)
 
+    print("loading")
     objects = get_objects()
+    print("loaded")
 
     offset_x = 0
     #scroll_area_width = 200
-    scroll_area_width = 400
 
     run = True
     while run:

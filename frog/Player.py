@@ -34,8 +34,8 @@ class Player(pygame.sprite.Sprite):
         self.hit_sound = pygame.mixer.Sound('assets/Sfx/hit.wav')  # Load a sound.
         self.hit_voice = pygame.mixer.Channel(5)
 
-        #self.sprites = load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
-        self.sprites = load_sprite_sheets("MainCharacters", "VirtualGuy", 32, 32, True)
+        self.sprites = load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
+        # self.sprites = load_sprite_sheets("MainCharacters", "VirtualGuy", 32, 32, True)
         self.buttons = load_sprite_sheets("Menu", "Buttons", 18, 18, False)
         print(self.buttons)
         self.heart_sprite = self.buttons['Play'][0]
