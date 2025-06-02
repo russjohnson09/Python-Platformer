@@ -9,11 +9,6 @@ from frog.Object import *
 
 
 
-
-
-
-
-
 class Player(pygame.sprite.Sprite):
     COLOR = (255, 0, 0)
     GRAVITY = 1
@@ -34,10 +29,16 @@ class Player(pygame.sprite.Sprite):
         self.hit = False
         self.hit_count = 0
 
+        self.health = 3
+
         self.hit_sound = pygame.mixer.Sound('assets/Sfx/hit.wav')  # Load a sound.
         self.hit_voice = pygame.mixer.Channel(5)
 
-        self.sprites = load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
+        #self.sprites = load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
+        self.sprites = load_sprite_sheets("MainCharacters", "VirtualGuy", 32, 32, True)
+        self.buttons = load_sprite_sheets("Menu", "Buttons", 18, 18, False)
+        print(self.buttons)
+        self.heart_sprite = self.buttons['Play'][0]
 
 
     #https://stackoverflow.com/questions/14432851/python-pygame-get-if-specific-sound-is-playing
@@ -129,4 +130,10 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, win, offset_x):
         win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
+        for i in range(0, self.health):
+            x = 10 + (i * 40)
+            # print(x)
+            win.blit(self.heart_sprite, (x, 10))
+
+        # draw player health
 
