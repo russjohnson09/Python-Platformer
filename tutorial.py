@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import random
 import math
@@ -9,10 +10,20 @@ pygame.init()
 pygame.display.set_caption("Platformer")
 
 WIDTH, HEIGHT = 1000, 800
+# WIDTH, HEIGHT = 800, 800
 FPS = 60
 PLAYER_VEL = 5
 
-window = pygame.display.set_mode((WIDTH, HEIGHT))
+#window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+
+print ("desktops", pygame.display.get_desktop_sizes())
+# https://github.com/pygame/pygame/blob/dac5b2e49613670f4c59ee7db06f2830e6e090ff/examples/setmodescale.py
+# window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED | pygame.RESIZABLE)
+
+window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.SCALED | pygame.RESIZABLE)
+
+#         screen.blit(pygame.transform.scale(pic, screen.get_size()), (0, 0))
+        # pygame.display.update()
 
 
 def flip(sprites):
@@ -224,6 +235,9 @@ def draw(window, background, bg_image, player, objects, offset_x):
 
     player.draw(window, offset_x)
 
+    #screen.blit(pygame.transform.scale(pic, screen.get_size()), (0, 0))
+    #pygame.display
+# pygame.display.update()
     pygame.display.update()
 
 

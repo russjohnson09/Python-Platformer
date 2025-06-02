@@ -1,3 +1,47 @@
+https://github.com/idriss-ensias/checkers-pygame
+
+
+
+ctl+ shift + p python interpreter new venv
+
+https://dafluffypotato.com/skills
+
+https://www.youtube.com/watch?v=2gABYM5M0ww
+
+
+
+
+pip install -r requirements.txt
+
+
+pygame's performance 
+
+https://www.youtube.com/watch?v=hnKocNdF9-U
+
+SDL
+
+pygame is a wrapper for SDL
+
+partially implemented GPU rendering in pygame
+
+
+GPU takes some extra steps.
+
+
+
+
+pyopengl for 3d
+
+
+Godot gdscript
+
+
+
+
+
+OpenCV
+
+
 # Python-Platformer
 
 # 💻 Launch Your Software Development Career Today!  
