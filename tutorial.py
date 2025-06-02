@@ -43,6 +43,10 @@ sound1 = pygame.mixer.Sound('assets/Sfx/hit.wav')  # Load a sound.
 voice = pygame.mixer.Channel(5)
 
 
+
+
+#https://stackoverflow.com/questions/14432851/python-pygame-get-if-specific-sound-is-playing
+#https://nerdparadise.com/programming/pygame/part3
 def playHit():
     if not voice.get_busy():
         voice.play(sound1)
@@ -335,21 +339,37 @@ def handle_move(player, objects):
             player.make_hit()
 
 
-def main(window):
-    fullscreen = False
-
-    clock = pygame.time.Clock()
-    background, bg_image = get_background("Blue.png")
-
+def get_objects():
     block_size = 96
-
-    player = Player(100, 100, 50, 50)
     fire = Fire(100, HEIGHT - block_size - 64, 16, 32)
     fire.on()
     floor = [Block(i * block_size, HEIGHT - block_size, block_size)
              for i in range(-WIDTH // block_size, (WIDTH * 2) // block_size)]
     objects = [*floor, Block(0, HEIGHT - block_size * 2, block_size),
                Block(block_size * 3, HEIGHT - block_size * 4, block_size), fire]
+    
+    return objects
+
+def main(window):
+    fullscreen = False
+
+    clock = pygame.time.Clock()
+    background, bg_image = get_background("Blue.png")
+
+    # block_size = 96
+
+    player = Player(100, 100, 50, 50)
+
+
+    # fire = Fire(100, HEIGHT - block_size - 64, 16, 32)
+    # fire.on()
+    # floor = [Block(i * block_size, HEIGHT - block_size, block_size)
+    #          for i in range(-WIDTH // block_size, (WIDTH * 2) // block_size)]
+    # objects = [*floor, Block(0, HEIGHT - block_size * 2, block_size),
+    #            Block(block_size * 3, HEIGHT - block_size * 4, block_size), fire]
+
+    
+    objects = get_objects()
 
     offset_x = 0
     scroll_area_width = 200
@@ -376,7 +396,14 @@ def main(window):
 
 
         player.loop(FPS)
-        fire.loop()
+
+        for object in objects:
+            #https://stackoverflow.com/questions/610883/how-can-i-check-if-an-object-has-an-attribute
+            if hasattr(object, 'loop'):
+                object.loop()
+        #fire.loop()
+
+
         handle_move(player, objects)
         draw(window, background, bg_image, player, objects, offset_x)
 
