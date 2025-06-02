@@ -3,13 +3,14 @@ import os
 import random
 import math
 import pygame
+from pygame.locals import *
 from os import listdir
 from os.path import isfile, join
 pygame.init()
 
 pygame.display.set_caption("Platformer")
 
-WIDTH, HEIGHT = 1000, 800
+WIDTH, HEIGHT = 1280, 720
 # WIDTH, HEIGHT = 800, 800
 FPS = 60
 PLAYER_VEL = 5
@@ -20,10 +21,25 @@ print ("desktops", pygame.display.get_desktop_sizes())
 # https://github.com/pygame/pygame/blob/dac5b2e49613670f4c59ee7db06f2830e6e090ff/examples/setmodescale.py
 # window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED | pygame.RESIZABLE)
 
-window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.SCALED | pygame.RESIZABLE)
 
 #         screen.blit(pygame.transform.scale(pic, screen.get_size()), (0, 0))
         # pygame.display.update()
+
+
+window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED)
+
+#window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.SCALED)
+#pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN | pygame.SCALED)
+
+def update_window(fullscreen):
+    print(WIDTH)
+    if fullscreen:
+        #window = 
+        pygame.display.set_mode((WIDTH, HEIGHT),pygame.FULLSCREEN | pygame.SCALED)
+    else:
+        #window = 
+        pygame.display.set_mode((WIDTH, HEIGHT),  pygame.SCALED)
+
 
 
 def flip(sprites):
@@ -292,6 +308,8 @@ def handle_move(player, objects):
 
 
 def main(window):
+    fullscreen = False
+
     clock = pygame.time.Clock()
     background, bg_image = get_background("Blue.png")
 
@@ -320,6 +338,14 @@ def main(window):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and player.jump_count < 2:
                     player.jump()
+                elif event.key == K_ESCAPE:
+                    run = False
+                    #sys.exit()
+                if event.key == K_f:
+                    fullscreen = not fullscreen
+                    
+                    update_window(fullscreen)
+
 
         player.loop(FPS)
         fire.loop()
