@@ -1,15 +1,11 @@
 #!/usr/bin/env python
-import os
-import random
-import math
 import pygame
 from pygame.locals import *
 
 from frog import Object, Fire, load_sprite_sheets
 from frog.Fire import *
 
-from os import listdir
-from os.path import isfile, join
+from os.path import join
 pygame.init()
 
 pygame.display.set_caption("Platformer")
@@ -286,6 +282,38 @@ def handle_move(player, objects):
             player.make_hit()
 
 
+
+def get_objects_from_file(file_path, block_size = 96):
+    objects = []
+
+    with open(file_path) as f:
+        row = 0
+        col = 0
+        for line in f:
+            col = 0
+            for char in line:
+                # print(row,col)
+                if char == '0':
+                    print('add block')
+                    block = Block(block_size * col, block_size * row, block_size)
+                    objects.append(block)
+                elif char == 'F':
+                    fire = Fire(block_size * col, (block_size * row) + 32, 16, 32)
+                    fire.on()
+                    objects.append(fire)
+                elif char == 'D': #double fire
+                    fire = Fire(block_size * col, (block_size * row) + 32, 16, 32)
+                    fire.on()
+                    objects.append(fire)
+                    fire2 = Fire(block_size * col + 64, (block_size * row) + 32, 16, 32)
+                    fire2.on()
+                    objects.append(fire2)
+
+                col += 1
+            row += 1
+    return objects
+
+
 # TODO read map1.txt
 def get_objects():
     block_size = 96
@@ -296,7 +324,9 @@ def get_objects():
     objects = [*floor, Block(0, HEIGHT - block_size * 2, block_size),
                Block(block_size * 3, HEIGHT - block_size * 4, block_size), fire]
     
-    return objects
+    # return objects
+
+    return get_objects_from_file("map1.txt")
 
 def main(window):
     fullscreen = False
